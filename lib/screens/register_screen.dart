@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_login/ui/input_decorations.dart';
 import 'package:flutter_login/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Login',
+                    'Crear cuenta',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   const SizedBox(
@@ -38,13 +38,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, 'register'), 
-              style: ButtonStyle(
-                overlayColor: MaterialSta
-              ),
-              child: const Text('Crear una cuenta Gratis'),
-              ),
+            const Text('¿Ya tienes cuenta?'),
             const SizedBox(
               height: 50,
             ),
