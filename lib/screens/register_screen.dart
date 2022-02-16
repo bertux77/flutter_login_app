@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/providers/login_form_provider.dart';
+import 'package:flutter_login/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_login/ui/input_decorations.dart';
 import 'package:flutter_login/widgets/widgets.dart';
@@ -111,30 +112,40 @@ class _LoginForm extends StatelessWidget {
               height: 20,
             ),
             MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                disabledColor: Colors.grey,
-                elevation: 0,
-                color: Colors.deepPurple,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  child: Text(
-                    loginForm.isLoading ? 'Enviando...' : 'Ingresar',
-                    style: const TextStyle(color: Colors.white),
-                  ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: Colors.deepPurple,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                child: Text(
+                  loginForm.isLoading ? 'Enviando...' : 'Ingresar',
+                  style: const TextStyle(color: Colors.white),
                 ),
-                onPressed: loginForm.isLoading
-                    ? null
-                    : () async {
-                        FocusScope.of(context).unfocus();
-                        if (!loginForm.isValidForm()) return;
-                        loginForm.isLoading = true;
+              ),
+              onPressed: loginForm.isLoading
+                  ? null
+                  : () async {
+                      FocusScope.of(context).unfocus();
+                      final authService =
+                          Provider.of<AuthService>(context, listen: false);
+                      if (!loginForm.isValidForm()) return;
+                      loginForm.isLoading = true;
 
-                        await Future.delayed(const Duration(seconds: 2));
-                        loginForm.isLoading = false;
+                      final String? errorMessage = await authService.createUser(
+                          loginForm.email, loginForm.password);
+
+                      if (errorMessage == null) {
                         Navigator.pushReplacementNamed(context, 'home');
-                      })
+                      } else {
+                        // mostrar mensaje de error
+                        print(errorMessage);
+                        loginForm.isLoading = false;
+                      }
+                    },
+            )
           ],
         ),
       ),
