@@ -39,12 +39,17 @@ class LoginScreen extends StatelessWidget {
               height: 50,
             ),
             TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, 'register'), 
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, 'register'),
               style: ButtonStyle(
-                overlayColor: MaterialSta
+                  overlayColor: MaterialStateProperty.all(
+                      Colors.deepOrange.withOpacity(0.1)),
+                  shape: MaterialStateProperty.all(StadiumBorder())),
+              child: const Text(
+                'Crear una cuenta Gratis',
+                style: TextStyle(fontSize: 18, color: Colors.black87),
               ),
-              child: const Text('Crear una cuenta Gratis'),
-              ),
+            ),
             const SizedBox(
               height: 50,
             ),

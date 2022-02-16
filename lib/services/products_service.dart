@@ -104,14 +104,16 @@ class ProductsService extends ChangeNotifier {
 
     final resp = await http.Response.fromStream(streamResponse);
 
-    if (resp.statusCode == 200 && resp.statusCode != 201) {
+    print(resp.statusCode);
+    if (resp.statusCode != 200 && resp.statusCode != 201) {
+      print('Algo salio mal');
       print(resp.body);
 
       return null;
     }
 
     newPicureFile = null;
-    final decodedData = jsonDecode(resp.body);
+    final decodedData = json.decode(resp.body);
     return decodedData['secure_url'];
   }
 }

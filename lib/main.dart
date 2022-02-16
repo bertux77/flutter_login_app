@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         'home': (_) => const HomeScreen(),
         'product': (_) => const ProductScreen(),
         'loading': (_) => const LoadingScreen(),
-        'regisgter': (_) => const RegisterScreen(),
+        'register': (_) => const RegisterScreen(),
       },
       theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.grey[300],

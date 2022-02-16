@@ -22,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Crear cuenta',
+                    'Registro',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   const SizedBox(
@@ -38,7 +38,17 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            const Text('¿Ya tienes cuenta?'),
+            TextButton(
+              onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
+              style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                      Colors.deepOrange.withOpacity(0.1)),
+                  shape: MaterialStateProperty.all(StadiumBorder())),
+              child: const Text(
+                '¿Ya tienes cuenta?',
+                style: TextStyle(fontSize: 18, color: Colors.black87),
+              ),
+            ),
             const SizedBox(
               height: 50,
             ),
